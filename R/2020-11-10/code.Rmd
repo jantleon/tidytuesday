@@ -49,9 +49,9 @@ plot <- data %>%
     facet_wrap(~ continent, scales = "free_x") +
     xlab(NULL) +
     ylab(NULL) +
-      labs(title = "<b>Numero de lineas <span style='color:red'>fijas</span> y <span style='color:blue'>moviles</span> por 100 habitantes (1990-2017)",
-         subtitle = "El número de líneas móviles se dispara desde finales de los años 90 en todo el mundo",
-         caption = "Fuente: Pew Research Smartphone Adoption | @jantleon") +
+      labs(title = "<b>Number of <span style='color:red'>landline</span> and <span style='color:blue'>mobile</span> subscriptiones per 100 (1990-2017)",
+         subtitle = "Mobile phone subscriptions shoot up worldwide since the end of the 90s",
+         caption = "Source: Pew Research Smartphone Adoption | @jantleon") +
     theme_minimal(base_family = "Bahnschrift") +
     theme(legend.position = "none",
           plot.title = element_markdown(hjust = 0.5),
@@ -64,6 +64,6 @@ plot
 Save the plot.
 
 ```{r}
-ggsave("R/2020-11-10/plot.png", plot, width = 6, height = 4)
+ggsave("plot.png", plot, width = 6, height = 4)
 ```
 
