@@ -64,6 +64,6 @@ plot
 Save the plot.
 
 ```{r}
-ggsave("R/2020-11-10/plot.png", plot)
+ggsave("R/2020-11-10/plot.png", plot, width = 6, height = 4)
 ```
 
