@@ -1,0 +1,53 @@
+---
+title: "Tidytuesday 24/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Load libraries.
+
+```{r}
+library(tidyverse)
+windowsFonts("Bahnschrift" = windowsFont("Bahnschrift"))
+```
+
+
+Read data.
+
+```{r}
+raw_data <- readr::read_rds(url('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-11-24/hike_data.rds'))
+```
+
+Clean data.
+
+```{r}
+clean_data <- hike_data %>% 
+                unnest(features) %>% 
+                select(rating, features) %>% 
+                mutate(rating = as.numeric(rating))
+```
+
+Visualize the boxplot.
+
+```{r}
+plot <- clean_data %>%
+          ggplot(aes(reorder(features, -rating, median, na.rm = TRUE), rating)) +
+          geom_jitter(position=position_jitter(width=.1, height=0)) +
+          geom_boxplot(outlier.shape=NA) +
+          labs(title = "Washington Hike's user ratings by main features", subtitle = "Visiting a Waterfall is the surebet", caption = "@jantleon | Source: TidyX", x = "", y = "") +
+          theme_minimal(base_family = "Bahnschrift") + 
+          theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+                plot.title = element_text(face = "bold", hjust = 0.5),
+                plot.subtitle = element_text(hjust = 0.5))
+
+plot
+```
+
+Save the plot.
+
+```{r}
+ggsave("plot.png", plot, width = 10, height = 6.5)
+```

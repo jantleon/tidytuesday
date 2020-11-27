@@ -27,12 +27,7 @@ Join both datasets.
 
 ```{r}
 data <- inner_join(mobile, select(landline, code, year, landline_subs), by = c("code", "year")) %>% 
-            mutate(year = as.character(year),
-                   continent = case_when(continent == "Africa" ~ "África",
-                                         continent == "Americas" ~ "América",
-                                         continent == "Europe" ~ "Europa",
-                                         TRUE ~ continent
-                                        ))
+            mutate(year = as.character(year))
 ```
 
 Visualize with ggplot2.
@@ -49,8 +44,8 @@ plot <- data %>%
     facet_wrap(~ continent, scales = "free_x") +
     xlab(NULL) +
     ylab(NULL) +
-      labs(title = "<b>Number of <span style='color:red'>landline</span> and <span style='color:blue'>mobile</span> subscriptiones per 100 (1990-2017)",
-         subtitle = "Mobile phone subscriptions shoot up worldwide since the end of the 90s",
+      labs(title = "<b>Number of <span style='color:red'>landline</span> and <span style='color:blue'>mobile</span> subscriptions per 100 (1990-2017)",
+         subtitle = "Mobile phone subscriptions shoot up worldwide since the end of '90s",
          caption = "Source: Pew Research Smartphone Adoption | @jantleon") +
     theme_minimal(base_family = "Bahnschrift") +
     theme(legend.position = "none",
